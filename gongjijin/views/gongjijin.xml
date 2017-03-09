@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+      <!-- 三金列表 -->
+        <record model="ir.ui.view" id="sanjin_tree_view">
+            <field name="name">djsanjin.tree</field>
+            <field name="model">yjjr.djsanjin</field>
+            <field name="arch" type="xml">
+                <tree string="san jin tree">
+                   
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="date_begin"/>
+                            <field name="date_cx"/>
+                            <field name="date_end"/>
+                            <field name="customer"/>
+                            <field name="shebao"/>
+                            <field name="gongjijin"/>
+                            <field name="geshui"/>
+                            <field name="fuwufei"/>
+                            <field name="geshui"/>
+                            <field name="memo"/>
+
+                </tree>
+            </field>
+        </record>
+      
+
+      <!-- 三金表单 -->
+        <record model="ir.ui.view" id="sanjin_form_view">
+            <field name="name">djsanjin.form</field>
+            <field name="model">yjjr.djsanjin</field>
+            <field name="arch" type="xml">
+                <form string="san jin form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="date_begin"/>
+                            <field name="date_cx"/>
+                            <field name="date_end"/>
+                            
+                            <field name="shebao"/>
+                            <field name="gongjijin"/>
+                            <field name="geshui"/>
+                            <field name="fuwufei"/>
+                            
+                            <field name="month_total"/>
+                            <field name="memo"/>
+
+
+                        </group>
+                        <group>
+                          <field name="djsanjin_mx_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="sanjin_list_action">
+            <field name="name">三金</field>
+            <field name="res_model">yjjr.djsanjin</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                  建立第一个代缴三金用户
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_dj_menu" name="代缴"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="dj_menu" name="代缴"
+                  parent="main_dj_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="sanjin_menu" name="三金" parent="dj_menu"
+                  action="sanjin_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+
+        <!-- company form -->
+        <record model="ir.ui.view" id="company_form_view">
+            <field name="name">company.form</field>
+            <field name="model">yjjr.company</field>
+            <field name="arch" type="xml">
+                <form string="company form">
+                    <sheet>
+                      <field name="name"/>
+                        <notebook>
+                          <page>
+                            
+                            <field name="djsanjin_ids">
+                              <tree>
+                              <field name="name"/>
+                            </tree>
+                          </field>
+                        </page>
+                          
+
+
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- company -->
+        <record model="ir.actions.act_window" id="company_list_action">
+            <field name="name">公司</field>
+            <field name="res_model">yjjr.company</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                  建立第一个公司
+                </p>
+            </field>
+        </record>
+        <menuitem id="company_menu" name="公司" parent="dj_menu"
+                  action="company_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module --> 
+    </data>
+</openerp>

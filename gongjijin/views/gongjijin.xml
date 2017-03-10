@@ -146,10 +146,10 @@
                 <form string="djsanjin.mx form">
                     <sheet>
                         <group>
-                            <field name="name"/>
+                            
                             <field name="gongzi"/>
                             <field name="djsanjin_id"/>
-                            <field name="gongzi"/>
+                            
                         </group>
                         <group>
                             <field name="shebao"/>
@@ -176,7 +176,7 @@
             <field name="arch" type="xml">
                 <tree string="djsanjin.mx tree">
                     
-                            <field name="name"/>
+                           
                             <field name="gongzi"/>
                             <field name="djsanjin_id"/>
                             <field name="gongzi"/>

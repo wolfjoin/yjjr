@@ -89,7 +89,8 @@ class Djcustomer(models.Model):
 class Djsanjin_mx(models.Model):
 	_name = 'yjjr.djsanjin.mx'
 
-	name = fields.Char(string="name", required=True)
+	# test name is nessiray
+	#name = fields.Char(string="name", required=True)
 	djsanjin_id = fields.Many2one('yjjr.djsanjin', string="dai jiao san jin")
 	gongzi = fields.Float(string="gongzi")
 	shebao = fields.Float(string="she bao")

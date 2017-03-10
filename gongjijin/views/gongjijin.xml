@@ -46,13 +46,19 @@
                             <field name="fuwufei"/>
                             
                             <field name="month_total"/>
+                            <field name="all_total"/>
                             <field name="memo"/>
 
 
                         </group>
-                        <group>
-                          <field name="djsanjin_mx_ids"/>
-                        </group>
+                        
+                        <field name="djsanjin_mx_ids">
+                            <tree>
+                                <field name="name"/>
+                                <field name="fuwufei"/>
+                            </tree>
+                        </field>
+                        
                     </sheet>
                 </form>
             </field>
@@ -100,17 +106,14 @@
                     <sheet>
                       <field name="name"/>
                         <notebook>
-                          <page>
-                            
+                          <page>                            
                             <field name="djsanjin_ids">
                               <tree>
-                              <field name="name"/>
+                                <field name="name"/>     
+                                <field name="memo"/>
                             </tree>
                           </field>
                         </page>
-                          
-
-
                         </notebook>
                     </sheet>
                 </form>
@@ -130,6 +133,82 @@
         </record>
         <menuitem id="company_menu" name="公司" parent="dj_menu"
                   action="company_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module --> 
+
+
+        <!-- sanjin ming xi form -->
+        <record model="ir.ui.view" id="sanjin_mx_form_view">
+            <field name="name">djsanjin.mx.form</field>
+            <field name="model">yjjr.djsanjin.mx</field>
+            <field name="arch" type="xml">
+                <form string="djsanjin.mx form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="gongzi"/>
+                            <field name="djsanjin_id"/>
+                            <field name="gongzi"/>
+                        </group>
+                        <group>
+                            <field name="shebao"/>
+                            <field name="gongjijin"/>
+                            <field name="geshui"/>
+                            <field name="fuwufei"/>
+                            <field name="dj_month"/>
+                        </group>
+                        <group>
+                            <field name="fukuanfs_id"/>
+                            <field name="fukuan_date"/>
+                        </group>
+                        <group>
+                            <field name="memo"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sanjin_mx_tree_view">
+            <field name="name">djsanjin.mx.tree</field>
+            <field name="model">yjjr.djsanjin.mx</field>
+            <field name="arch" type="xml">
+                <tree string="djsanjin.mx tree">
+                    
+                            <field name="name"/>
+                            <field name="gongzi"/>
+                            <field name="djsanjin_id"/>
+                            <field name="gongzi"/>
+                        
+                            <field name="shebao"/>
+                            <field name="gongjijin"/>
+                            <field name="geshui"/>
+                            <field name="fuwufei"/>
+                            <field name="dj_month"/>
+                        
+                            <field name="fukuanfs_id"/>
+                            <field name="fukuan_date"/>
+                       
+                            <field name="memo"/>
+             
+                </tree>
+            </field>
+        </record>
+        <!-- company -->
+        <record model="ir.actions.act_window" id="djsanjin_mx_list_action">
+            <field name="name">djsanjin.mx</field>
+            <field name="res_model">yjjr.djsanjin.mx</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                  建立第一个代缴明细
+                </p>
+            </field>
+        </record>
+        <menuitem id="sanjin_mx_menu" name="三金明细" parent="dj_menu"
+                  action="djsanjin_mx_list_action"/>
         <!-- Full id location:
              action="openacademy.course_list_action"
              It is not required when it is the same module --> 

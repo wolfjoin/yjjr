@@ -50,14 +50,38 @@
                                 <field name="all_total"/>  
                             </group>
                         </group>
-                        <field name="memo"/>
-                        
-                        <field name="djsanjin_mx_ids">
-                            <tree string="缴费明细">
-                                <field name="djsanjin_id"/>
-                                <field name="gongzi"/>
-                            </tree>
-                        </field>
+                        <group>
+                            <field name="memo"/>
+                        </group>
+                        <notebook>
+                            <page string="缴费明细">
+                                <field name="djsanjin_mx_ids"/>
+                            </page>
+
+                            <page string="员工信息">
+
+                                <group>
+                                    <group>
+                                        <field name="sex"/>
+                                        <field name="mobile"/>
+                                    </group>
+                                    <group>
+                                         
+                                        <field name="shenfenzheng"/>
+                                        <field name="gjjno"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    
+
+                                    <field name="qita"/>
+                                 </group>
+
+                            </page>
+
+                            
+                        </notebook>
+
                         
                     </sheet>
                 </form>
@@ -104,15 +128,14 @@
             <field name="arch" type="xml">
                 <form string="company form">
                     <sheet>
+                        <group>
                       <field name="name"/>
+                  </group>
                         <notebook>
-                          <page>                            
-                            <field name="djsanjin_ids">
-                              <tree>
-                                <field name="name"/>     
-                                <field name="memo"/>
-                            </tree>
-                          </field>
+                          <page string="员工">                            
+                            <field name="djsanjin_ids"/>
+                              
+                         
                         </page>
                         </notebook>
                     </sheet>
@@ -146,25 +169,31 @@
                 <form string="djsanjin.mx form">
                     <sheet>
                         <group>
-                            
-                            <field name="gongzi"/>
                             <field name="djsanjin_id"/>
-                            
+                            <group string="基础">
+
+                                
+                                <field name="gongzi"/>
+                                
+                                <field name="fukuanfs_ids"/>
+                                <field name="fukuan_date"/>
+                                <field name="dj_month"/>
+                                <field name="real_get_money"/>
+                                
+                            </group>
+                            <group string="金额">
+                                <field name="shebao"/>
+                                <field name="gongjijin"/>
+                                <field name="geshui"/>
+                                <field name="fuwufei"/>
+                                <field name="month_total"/>
+                                
+                                
+                            </group>
                         </group>
-                        <group>
-                            <field name="shebao"/>
-                            <field name="gongjijin"/>
-                            <field name="geshui"/>
-                            <field name="fuwufei"/>
-                            <field name="dj_month"/>
-                        </group>
-                        <group>
-                            <field name="fukuanfs_id"/>
-                            <field name="fukuan_date"/>
-                        </group>
-                        <group>
-                            <field name="memo"/>
-                        </group>
+                        
+                        <field name="memo" string="备注"/>
+                         
                     </sheet>
                 </form>
             </field>
@@ -187,7 +216,7 @@
                             <field name="fuwufei"/>
                             <field name="dj_month"/>
                         
-                            <field name="fukuanfs_id"/>
+                            <field name="fukuanfs_ids"/>
                             <field name="fukuan_date"/>
                        
                             <field name="memo"/>
@@ -196,6 +225,8 @@
             </field>
         </record>
         <!-- company -->
+
+
         <record model="ir.actions.act_window" id="djsanjin_mx_list_action">
             <field name="name">djsanjin.mx</field>
             <field name="res_model">yjjr.djsanjin.mx</field>
@@ -216,121 +247,6 @@
 
 
 
-
-
-        <record id="my_id_form" model="ir.ui.view">
-            <field name="name">my_name_form</field>
-            <field name="model">my_model_one</field>
-            <field name="arch" type="xml">
-                <form string="Name">
-                    <sheet>
-                        <group>
-                            <field name="partner_id"/>
-                            <field name="money"/>
-                            <field name="my_model_two_ids" />
-                             <!-- name_of_parameter: name_of_field -->
-                            <button string="Open popup"
-                                name="%(gongjijin.action_open_popup)d"
-                                type="action"
-                                class="btn-link"   
-                                context="{'partner_id': partner_id,'money': money,'my_model_one_id': my_model_one_id}"/>                         
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-
-<record id="model_two_form_popup" model="ir.ui.view">
-    <field name="name">Popup name</field>
-    <field name="model">my_model_two</field>
-    <field name="arch" type="xml">
-        <form string="Popup text">
-            <sheet>
-                <group>
-                    <field name="my_model_one_id" />
-                    <field name="partner_id" />
-                    <field name="money" />
-                    <field name="all_total" />
-                </group>
-
-                <footer>
-                        <button name="save_model_two" type="object"
-                                string="Subscribe" class="oe_highlight"/>
-                        or
-                        <button special="cancel" string="Cancel"/>
-                    </footer>
-            </sheet>
-        </form>
-    </field>
-</record>
-
-        <record id="action_open_popup" model="ir.actions.act_window">
-    <field name="name">action name</field>
-    <field name="res_model">my_model_two</field>
-    <field name="view_id" ref="model_two_form_popup"/>
-    <!-- set default value to field from context parameter by name -->
-    <field name="context">{'default_partner_id': context.get('partner_id', False),'default_money': context.get('money', False),'default_my_model_one_id': context.get('my_model_one_id', False),}</field>
-    <field name="target">new</field>
-</record>
-
-<record model="ir.actions.act_window" id="test_my_list_action">
-            <field name="name">my_model_one</field>
-            <field name="res_model">my_model_one</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                  my_model_one
-                </p>
-            </field>
-        </record>
-
-<menuitem id="my_model_one_menu" name="my_model_one" parent="dj_menu"
-                  action="test_my_list_action"/>
-
-<record id="model_two_base_form_popup" model="ir.ui.view">
-    <field name="name">Popup name</field>
-    <field name="model">my_model_two</field>
-    <field name="arch" type="xml">
-        <form string="Popup text">
-            <sheet>
-                <group>
-                    <field name="partner_id" />
-                    <field name="money" />
-                    <field name="all_total" />
-                </group>
-            </sheet>
-        </form>
-    </field>
-</record>
-
-<record id="model_two_base_tree_popup" model="ir.ui.view">
-    <field name="name">Popup name</field>
-    <field name="model">my_model_two</field>
-    <field name="arch" type="xml">
-        <tree string="Popup text">
-            
-                    <field name="partner_id" />
-                    <field name="money" />
-                    <field name="all_total" />     
-        </tree>
-    </field>
-</record>
-
-<record model="ir.actions.act_window" id="my_model_two_list_action">
-            <field name="name">my_model_two</field>
-            <field name="res_model">my_model_two</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                  my_model_two
-                </p>
-            </field>
-        </record>
-
-<menuitem id="my_model_two_menu" name="my_model_two" parent="dj_menu"
-                  action="my_model_two_list_action"/>
 
 
 
